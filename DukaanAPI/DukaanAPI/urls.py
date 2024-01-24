@@ -23,8 +23,8 @@ from APIHandler.views import OrderAPIView, Home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home, name='home'),
-    path('api/user/register/', UserRegistrationView, name='user-registration'),
-    path('api/user/login/', UserLoginView.as_view(), name='user-login'),
-    path('api/user/logout/', LogoutView.as_view(next_page='user-login'), name='user-logout'),
+    path('auth/register/', UserRegistrationView, name='user-registration'),
+    path('auth/login/', UserLoginView.as_view(), name='user-login'),
+    path('auth/logout/', LogoutView.as_view(next_page='user-login'), name='user-logout'),
     path('api/order/', OrderAPIView.as_view(), name='order-api'),
 ]
