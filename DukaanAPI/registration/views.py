@@ -6,7 +6,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, login
-from django.urls import reverse
 from .serializers import UserRegistrationSerializer, UserLoginSerializer
 
 class UserRegistrationView(APIView):
