@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock title %}
-{% comment %} {% load rest_framework %} {% endcomment %}
+{% load rest_framework %}
 {% block main %}
   <form method="post" action="{% url 'user-login' %}">
     {% csrf_token %}
-    <input placeholder="Email" type="Email" name="email" id="email">
-    <input placeholder="Password" type="Password" name="password" id="password">
-    {% comment %} {% render_form serializer %} {% endcomment %}
+    {% render_form serializer %}
     <button type="submit" class="btn btn-success">Login</button>
   </form>
+
+  <script>
+    var passField = document.getElementsByName('password')
+    passField[0].type = 'password'
+  
+  </script>
 {% endblock main %}
