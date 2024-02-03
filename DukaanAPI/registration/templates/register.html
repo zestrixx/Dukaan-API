@@ -6,7 +6,7 @@
 <form method="post" action="{% url 'user-registration' %}">
     {% csrf_token %}
     {% render_form serializer %}
-    {% comment %} <div class="mb-3 row">
+    <!--<div class="mb-3 row">
       <label for="{{ form.name.id_for_label }}" class="col-sm-2 col-form-label">Name</label>
       <div class="col-sm-10">
         {{ form.name }}
@@ -39,7 +39,16 @@
 
     {% if form.password2.errors %}
     <p class="error-message">{{ form.password2.errors }}</p>
-    {% endif %} {% endcomment %}
+    {% endif %}-->
     <button type="submit" class="btn btn-warning">Register</button>
 </form>
+
+<script>
+  var passField = document.getElementsByName('password')
+  console.log(passField[0])
+  passField[0].type = 'password'
+  console.log(passField[0])
+
+</script>
 {% endblock main %}
+
