@@ -18,7 +18,6 @@ class UserRegistrationView(generics.CreateAPIView):
         return render(request, 'register.html', context)
 
     def post(self, request):
-        # print(request.data.get('first_name'))
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -31,7 +30,7 @@ class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
     def get(self, request):
         serializer = UserLoginSerializer()
-        context = {'erializer':serializer}
+        context = {'serializer':serializer}
         return render(request, 'registration/login.html', context)
 
     def post(self, request, *args, **kwargs):
