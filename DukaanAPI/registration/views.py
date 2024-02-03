@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from .serializers import UserRegistrationSerializer, UserLoginSerializer
 
-class UserRegistrationView(generics.CreateAPIView):
+class UserRegistrationView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
