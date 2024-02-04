@@ -2,18 +2,10 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-from .models import CustomUser
-User = get_user_model()
+User = get_user_model() #Return the User model that is active in this project - CustomUser in this case.
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-    required=True,
-    validators=[UniqueValidator(queryset=User.objects.all())]
-  )
-    password = serializers.CharField(
-        write_only=True, required=True, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True, required=True)
-
 
     class Meta:
         model = User
@@ -30,12 +22,12 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return attrs
     
     def create(self, validated_data):
-        user = User.objects.create(
-        email=validated_data['email'],
-        first_name=validated_data['first_name'],
-        last_name=validated_data['last_name']
-        )
-        user.set_password(validated_data['password'])
+        #~we have to remove the 'confirm_password' field from validated data ordered dict before creating user object as user doesn't have confirm_password field in the custom user model as it is used for frontend purpose only to let user input correct password.
+        validated_data.pop('confirm_password', None)
+        password = validated_data.pop('password', None)
+        #& we can always create user without popping out password before creation but that way we django will not hashes the password, so I first popped the password and created the user obj then set the password using set_password() method to ensure hashing
+        user = User.objects.create(**validated_data)
+        user.set_password(password)
         user.save()
         return user
 
