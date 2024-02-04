@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock title %}
-{% comment %} {% load rest_framework %} {% endcomment %}
+{% load rest_framework %}
 {% block main %}
   <form method="post" action="{% url 'user-login' %}">
     {% csrf_token %}
-    {% comment %} <input placeholder="Email" type="Email" name="email" id="email">
-    <input placeholder="Password" type="Password" name="password" id="password"> {% endcomment %}
-    {% render_form serializer %}
+    {{form.as_p}}
     <button type="submit" class="btn btn-success">Login</button>
   </form>
 {% endblock main %}
