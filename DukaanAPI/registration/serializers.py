@@ -1,15 +1,16 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-User = get_user_model() #Return the User model that is active in this project - CustomUser in this case.
+# User = get_user_model() #Return the User model that is active in this project - CustomUser in this case.
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True, required=True)
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name','email', 'password', 'confirm_password')
+        fields = ('username', 'first_name', 'last_name', 'password', 'confirm_password')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -33,5 +34,5 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
+    username = serializers.CharField()
     password = serializers.CharField()
