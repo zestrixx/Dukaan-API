@@ -33,6 +33,7 @@ class UserLoginAPIView(APIView):
 
     def post(self, request, *args, **kwargs):
         serializer = UserLoginSerializer(data=request.data)
+        print(serializer)
         if serializer.is_valid():
             username = serializer.validated_data['username']
             password = serializer.validated_data['password']

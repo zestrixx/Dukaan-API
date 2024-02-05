@@ -1,16 +1,32 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock title %}
-{% load rest_framework %}
-{% block main %}
-  <form method="post" action="{% url 'user-login' %}">
-    {% csrf_token %}
-    {% render_form serializer %}
-    <button type="submit" class="btn btn-success">Login</button>
-  </form>
+{% load static %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static "css/login.css" %}">
+{% endblock stylesheet %}
 
-  <script>
-    var passField = document.getElementsByName('password')
-    passField[0].type = 'password'
-  
-  </script>
+{% block main %}
+
+  <div class="login-box">
+    <h2>Login</h2>
+    <form method="post" action="{% url 'user-login' %}">
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label>Password</label>
+      </div>
+      <button class="submit-btn" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Login
+      </button>
+    </form>
+  </div>
+
 {% endblock main %}

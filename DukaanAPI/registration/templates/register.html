@@ -1,18 +1,45 @@
 {% extends 'base.html' %}
 {% block title %}Sign Up{% endblock title %}
-{% load rest_framework %}
+{% load static %}
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static "css/register.css" %}">
+{% endblock stylesheet %}
+
 {% block main %}
-<h2>Register</h2>
-<form method="post" action="{% url 'user-registration' %}">
-    {% csrf_token %}
-    {% render_form serializer %}
-    <button type="submit" class="btn btn-warning">Register</button>
-</form>
 
-<script>
-  var passField = document.getElementsByName('password')
-  passField[0].type = 'password'
+  <div class="register-box">
+    <h2>Register</h2>
+    <form method="post" action="{% url 'user-registration' %}">
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="text" name="username" required="">
+        <label>Username</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="first_name" required="">
+        <label>First Name</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="last_name" required="">
+        <label>Last Name</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label>Password</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="confirm_password" required="">
+        <label>Confirm Password</label>
+      </div>
+      <button class="submit-btn" type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Sign Up
+      </button>
+    </form>
+  </div>
 
-</script>
 {% endblock main %}
 
