@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from rest_framework.response import Response
+from django.urls import reverse
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework import status, generics
@@ -41,7 +42,11 @@ class UserLoginAPIView(APIView):
 
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                next_url = request.GET.get("next")
+                if next_url:
+                    return redirect(next_url)
+                else:
+                    return redirect('home')
             else:
                 return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         else:
