@@ -19,7 +19,7 @@ class UserRegistrationAPIView(APIView):
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
-            refresh = RefreshToken.for_user(user)
+            refresh = RefreshToken.for_user(user) # type: ignore
             return redirect('user-login')
         return Response(serializer.errors, status=400)
 
@@ -34,8 +34,8 @@ class UserLoginAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = UserLoginSerializer(data=request.data)
         if serializer.is_valid():
-            username = serializer.validated_data['username']
-            password = serializer.validated_data['password']
+            username = serializer.validated_data['username'] # type: ignore
+            password = serializer.validated_data['password'] # type: ignore
 
             user = authenticate(request, username=username, password=password)
 
