@@ -13,7 +13,7 @@ class OrderAPIView(APIView):
 
     def get(self, request):
         if not request.user.is_authenticated:
-            next_url = request.build_absolute_uri()
+            next_url = request.path
             login_url = reverse('user-login') + '?next=' + next_url
             return redirect(login_url)
         return Response({'message': 'Order received successfully'})
