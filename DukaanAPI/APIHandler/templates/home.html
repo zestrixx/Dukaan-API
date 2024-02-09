@@ -2,5 +2,22 @@
 
 {% block title %}Home{% endblock title %}
 {% block main %}
+  {% for message in messages %}
+    {% if message %}
+      <div
+        class="alert alert-warning alert-dismissible fade show"
+        role="alert">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close">
+        </button>
+      
+        <strong>Did you forget?</strong> {{ message }}
+      </div>
+      {% endif %}
+  {% endfor %}
   <h1>hello, in home page!!!!</h1>
+
 {% endblock main %}

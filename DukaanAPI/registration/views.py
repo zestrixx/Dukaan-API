@@ -6,12 +6,16 @@ from rest_framework.permissions import AllowAny
 from rest_framework import status, generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from .serializers import UserRegistrationSerializer, UserLoginSerializer
 
 class UserRegistrationAPIView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
+        if request.user and request.user.is_authenticated:
+            messages.info(request, 'You are already logged in!')
+            return redirect('home')
         serializer = UserRegistrationSerializer()
         context = {'serializer': serializer}
         return render(request, 'register.html', context)
@@ -28,6 +32,9 @@ class UserRegistrationAPIView(APIView):
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
     def get(self, request):
+        if request.user and request.user.is_authenticated:
+            messages.info(request, 'You are already logged in!')
+            return redirect('home')
         serializer = UserLoginSerializer()
         context = {'serializer':serializer}
         return render(request, 'registration/login.html', context)
