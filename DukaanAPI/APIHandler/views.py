@@ -15,6 +15,7 @@ class OrderAPIView(APIView):
         if not request.user.is_authenticated:
             next_url = request.path
             login_url = reverse('user-login') + '?next=' + next_url
+            messages.warning(request, 'Please login to your account.')
             return redirect(login_url)
         return render(request, 'dashboard.html')
         
