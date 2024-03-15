@@ -8,7 +8,7 @@ class Orders(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class OrderDetails(models.Model):
-    order_id = models.ForeignKey(Orders, on_delete = models.CASCADE)
+    order_id = models.ForeignKey(Orders, unique=True, on_delete = models.CASCADE)
     items = models.JSONField()
     customer_first_name = models.CharField(max_length=100)
     customer_last_name = models.CharField(max_length=100)
