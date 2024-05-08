@@ -50,6 +50,7 @@ class UserLoginAPIView(APIView):
             if user is not None:
                 login(request, user)
                 next_url = request.POST.get('next')
+                print(next_url)
                 if next_url:
                     return redirect(next_url)
                 else:

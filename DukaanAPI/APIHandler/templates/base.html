@@ -38,7 +38,8 @@
             {% endif %}
             <a class="nav-link active" aria-current="page" href={% url 'home' %}>Home</a>
          
-            <a class="nav-link" href="/dashboard">Dashboard</a>
+            <a class="nav-link" href="{% url "user-dashboard" %}">Dashboard</a>
+            <a class="nav-link" href="{% url "order-api" %}">Orders</a>
          
             {% if user.is_authenticated %}
               <a class="nav-link" href="{% url 'user-logout' %}">Logout</a>
